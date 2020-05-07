@@ -3,6 +3,12 @@ class App extends React.Component {
         name: 'Jason',
         age: 39
     }
+    handleChange = e => {
+        this.setState({
+            name: e.target.value
+        });
+    }
+
     handleClick = e => {                                                                // Arrow functions bind this to the component
         if(this.state.name === 'Jason'){
             this.setState({
@@ -18,6 +24,10 @@ class App extends React.Component {
     }                             
     handleCopy = e => console.log('Quit stealing my content.');                         
     handleHover = e => console.log(e);
+    handleSubmit = e => {
+        e.preventDefault();
+        e.target.reset();
+    }
     render() {
         return (
             <div>
@@ -25,6 +35,10 @@ class App extends React.Component {
                 <button onClick={ this.handleClick  }>Click me, bro.</button>
                 <button onMouseOver= { this.handleHover }>Hover me, bro.</button>
                 <p onCopy={ this.handleCopy }>What we think, we become.</p>
+                <form onSubmit={ this.handleSubmit }>
+                    <input type="text" onChange={ this.handleChange } />
+                    <button>Submit</button>
+                </form>
             </div>
         )
     }
