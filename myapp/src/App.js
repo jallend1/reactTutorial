@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Turtles from './Turtles';
+import AddTurtle from './AddTurtle';
 
 class App extends Component {
   state = {
@@ -10,6 +11,19 @@ class App extends Component {
         {name: "Michelangelo", age: 16, mask: "Orange", id: 4}
     ]
   }
+  addTurtle = turtle => {
+    turtle.id = Math.random();
+    let turtles = [...this.state.turtles, turtle];
+    this.setState({
+      turtles: turtles
+    })
+  }
+  deleteTurtle = id => {
+    let turtles = this.state.turtles.filter(turtle => id !== turtle.id)
+    this.setState({
+      turtles: turtles
+    })
+  }
   render(){
     return (
       <div className="App">
@@ -17,7 +31,8 @@ class App extends Component {
           <h1>My First React App!</h1>
         </header>
         <p>Welcome!</p>
-        <Turtles turtles = { this.state.turtles }/>
+        <Turtles deleteTurtle={ this.deleteTurtle } turtles={ this.state.turtles } />
+        <AddTurtle addTurtle={ this.addTurtle } />
       </div>
     );
   }
